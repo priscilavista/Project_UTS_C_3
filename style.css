@@ -1,0 +1,221 @@
+html,
+body {
+  height: 100%;
+  background-color: #5913ca !important;
+  font-family: "Roboto", sans-serif;
+}
+
+.global-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #303030;
+}
+
+form {
+  padding-top: 10px;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.login-form {
+  width: 390px;
+  height: 450px;
+  margin: 20px;
+  background: #dcdcdc !important;
+  border-radius: 10px !important;
+}
+
+.register-form {
+  width: 390px;
+  height: 600px;
+  margin: 20px;
+  background: #dcdcdc !important;
+  border-radius: 10px !important;
+}
+
+.profile-form {
+  width: 450px;
+  height: 520px;
+  padding: 30px;
+  background: #dcdcdc !important;
+  border-radius: 10px !important;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  background: #dcdcdc;
+  border: 2px solid #5913ca;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+/* input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border: none;
+  background: #dcdcdc;
+  margin: 0;
+} */
+
+.card-title {
+  font-weight: 900;
+  padding-top: 20px;
+}
+
+.btn {
+  background: #5913ca !important;
+  font-size: 14px;
+  transform: translateY(10px);
+  border-radius: 10px !important;
+}
+
+.signup {
+  text-align: center;
+  padding-top: 25px;
+}
+
+.sliders .carousel-caption {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 0 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.text-color-purple {
+  color: #5913ca !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Gerogia;
+  background-color: whitesmoke;
+}
+
+#app {
+  display: flex;
+  max-width: 100%;
+  min-height: 100vh;
+}
+
+#app .sidebar {
+  background-color: #5913ca;
+  transition: margin-left 0.5s ease-out;
+  min-width: 250px;
+}
+
+#app .sidebar-hide {
+  margin-left: -250px;
+}
+
+.for-dashboard .sidebar .header {
+  background-color: #5913ca;
+  text-align: center;
+  padding: 32px 8px;
+}
+
+.for-dashboard .sidebar .header .brand {
+  font-family: "Segoe UI";
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 32px;
+}
+
+.for-dashboard .sidebar .header .brand span {
+  color: rgba(255, 255, 255, 1);
+  font-weight: 700;
+}
+
+.for-dashboard .sidebar .body {
+  margin-top: 64px;
+}
+
+.for-dashboard .sidebar .body a {
+  text-decoration: none;
+}
+
+.for-dashboard .sidebar .body .item {
+  color: #f5f6fa;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 18px 24px;
+  font-size: 14px;
+}
+
+.for-dashboard .sidebar .body .item:hover {
+  background-color: #a0a0a0;
+}
+
+.for-dashboard .active {
+  background-color: #e3a916;
+}
+
+.for-dashboard .content {
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.for-dashboard .content .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.for-dashboard .content .header .hamburger {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  width: 22px;
+}
+
+.for-dashboard .content .header .hamburger div {
+  border: 1px solid #a5b1c2;
+  margin-top: 6px;
+}
+
+.for-dashboard .content .header .logout {
+  font-family: Arial;
+  color: #95afc0;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.for-dashboard .content .header .logout i {
+  margin-left: 4px;
+}
+
+.for-dashboard {
+  background-color: #ffffff;
+}
+
+.fa-caret-left {
+  color: #ffffff;
+}
+
+.btn-inventory {
+  float: right;
+  background: #ffffff !important;
+  margin-top: 30px;
+  margin-right: 30px;
+}
+
+.for-select {
+  background: #dcdcdc;
+  border: 2px solid #5913ca;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
