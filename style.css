@@ -1,7 +1,6 @@
 html,
 body {
   height: 100%;
-  background-color: #5913ca !important;
   font-family: "Roboto", sans-serif;
 }
 
@@ -113,7 +112,7 @@ body {
 }
 
 #app .sidebar {
-  background-color: #5913ca;
+  background-color: #e3a916;
   transition: margin-left 0.5s ease-out;
   min-width: 250px;
 }
@@ -123,7 +122,7 @@ body {
 }
 
 .for-dashboard .sidebar .header {
-  background-color: #5913ca;
+  background-color: #e3a916;
   text-align: center;
   padding: 32px 8px;
 }
@@ -160,7 +159,7 @@ body {
 }
 
 .for-dashboard .active {
-  background-color: #e3a916;
+  background-color: #6533bb;
 }
 
 .for-dashboard .content {
@@ -198,9 +197,9 @@ body {
   margin-left: 4px;
 }
 
-.for-dashboard {
+/* .for-dashboard {
   background-color: #ffffff;
-}
+} */
 
 .fa-caret-left {
   color: #ffffff;

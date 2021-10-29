@@ -20,51 +20,31 @@
           <a href="./dashboardAdminPage.php"><i class="fa fa-caret-left fa-2x mt-3"></i></a>
           </li>
         </ul>
-        <div
-          class="navbar-nav ms-auto mb-2 mb-lg-0 nav-item dropdown"
-          style="margin-right: 100px"
-        >
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Inventory
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="./createItemPage.php">Create Item</a></li>
-            <li>
-              <a class="dropdown-item" href="./updateStockPage.php">Add Stock</a>
-            </li>
-          </ul>
-        </div>
       </div>
     </nav>
     <div>
-        <br><br><br>
+        <br><br><br><br>
     </div>
         <br><br><br>
         <div class="container p-3" style="background-color: #FFF; border-top: 5px solid #17337A; 
           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); width: 75%;" >
-              <h4 class="text-center">DATA OBAT</h4> 
+              <h4 class="text-center">ONGOING TRANSACTION</h4> 
               <hr> 
               <table class="table"> 
                   <thead> 
                       <tr> 
                         <th scope="col">No</th> 
-                        <th scope="col" >Obat</th> 
-                        <th scope="col">Jenis</th> 
-                        <th scope="col">Harga</th> 
-                        <th scope="col">Stock</th> 
+                        <th scope="col">User</th>
+                        <th scope="col">Obat</th>      
+                        <th scope="col">Jumlah</th>  
+                        <th scope="col">Total</th>  
+                        <th scope="col">Status</th> 
                         <th scope="col"></th>  
                       </tr> 
                   </thead> 
                   <?php
                     include('../../db.php');
-                    $batas = 5;
+                    $batas = 1;
                     $halaman = @$_GET['halaman'];
                       if (empty($halaman)) {
                         $posisi = 0;
@@ -74,24 +54,38 @@
                         $posisi = ($halaman-1) * $batas;
                       }
                     $no = $posisi+1;
-                    $sql = "SELECT * FROM obat ORDER BY id_obat DESC limit $posisi,$batas";
+                    $sql = "SELECT * FROM transaction WHERE is_checkout = true AND status != 'Diterima' ORDER BY id_transaction DESC limit $posisi,$batas";
                     $hasil = mysqli_query($con, $sql);
                     while($data = mysqli_fetch_assoc($hasil)) {
+                        //get nama obat
+                        $id_obat = $data['id_obat'];
+                        $obat = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM obat WHERE id_obat=$id_obat"));
+                        $nama_obat = $obat['nama_obat'];
+                        //get nama user
+                        $id_user = $data['id_user'];
+                        $user = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM user WHERE id_user=$id_user"));
+                        $nama_user = $user['fullname'];
                   ?>
                       <tbody> 
                       <tr> 
-                          <th scope="row"><?php echo $no;?></th> 
-                          <td scope="row"><?php echo $data['nama_obat'];?></td>
-                          <td scope="row"><?php echo $data['jenis'];?></td>
-                          <td scope="row"><?php echo $data['harga'];?></td>
-                          <td scope="row"><?php echo $data['stock'];?></td>
+                          <th scope="row" style="vertical-align: middle"><?php echo $no;?></th> 
+                          <td scope="row" style="vertical-align: middle"><?php echo $nama_user;?></td>
+                          <td scope="row" style="vertical-align: middle"><?php echo $nama_obat;?></td>
+                          <td scope="row" style="vertical-align: middle"><?php echo $data['jumlah'];?></td>
+                          <td scope="row" style="vertical-align: middle"><?php echo $data['total'];?></td>
+                          <td scope="row" style="vertical-align: middle"><?php echo $data['status'];?></td>
                           <td>
-                            <a href="./updateItemPage.php?id_obat=<?php echo $data['id_obat'];?>"><i style="color: green" class="fa fa-edit"></i></a> 
-                            <a href="../../process/admin/deleteItemProcess.php?id_obat=<?php echo $data['id_obat'];?>"  
-                                onClick="return confirm ( \'Yakin untuk menghapus <?php echo $data['id_obat'];?>?\')"> 
-                                <i style="color: red" class="fa fa-trash"></i> 
-                            </a> 
-                </td>
+                            <form action="./updateTransactionPage.php?id_transaction=<?php echo $data['id_transaction'];?>" method="POST">
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary"
+                                    name="updateTransaction"
+                                    style="margin-bottom: 55px;"
+                                >
+                                    Update
+                                </button>
+                            </form>
+                            </td>
                       </tr>
                       </tbody>
                       <?php
@@ -100,7 +94,7 @@
                       ?>
                 </table>
                 <?php
-                  $query2 = mysqli_query($con, "SELECT * FROM obat");
+                  $query2 = mysqli_query($con, "SELECT * FROM transaction WHERE is_checkout = true AND status != 'Diterima'");
                   $jmldata = mysqli_num_rows($query2);
                   $jmlhalaman = ceil($jmldata/$batas);
                 ?>
@@ -110,7 +104,7 @@
                     <?php
                       for($i=1; $i<=$jmlhalaman; $i++) {
                         if ($i != $halaman) {
-                          echo "<li class='page-item'><a class='page-link' href='inventoryPage.php?halaman=$i'>$i</a></li>";
+                          echo "<li class='page-item'><a class='page-link' href='transactionUserPage.php?halaman=$i'>$i</a></li>";
                         }
                         else {
                           echo "<li class='page-item active'><a class='page-link' href='#'>$i</a></li>";

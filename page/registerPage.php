@@ -13,6 +13,10 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
     <link
       rel="stylesheet"
@@ -22,6 +26,17 @@
     <title>Register</title>
   </head>
   <body>
+    <style>
+      body {
+        background: #7f00ff !important;
+        background: -webkit-repeating-linear-gradient(
+          to right,
+          #e100ff,
+          #7f00ff
+        ) !important;
+        background: linear-gradient(to right, #e100ff, #7f00ff) !important;
+      }
+    </style>
     <!-- navbar  -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
       <button
@@ -54,7 +69,7 @@
         <div class="card-body">
           <h1 class="card-title text-center fs-4">Create your account</h1>
           <div class="card-text">
-            <form action="../process/registerProcess.php" method="POST">
+            <form action="../process/RegisterProcess.php" method="POST" class="needs-validation" novalidate>
               <div class="form-group">
                 <label for="fullname">Full Name</label>
                 <input
@@ -62,7 +77,10 @@
                   name="fullname"
                   id="fullname"
                   class="form-control form-control-sm mt-2"
+                  required
                 />
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
               </div>
 
               <div class="form-group">
@@ -72,7 +90,10 @@
                   name="phone"
                   id="phone"
                   class="form-control form-control-sm mt-2"
+                  required
                 />
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
               </div>
 
               <div class="form-group">
@@ -82,7 +103,10 @@
                   name="email"
                   id="email"
                   class="form-control form-control-sm mt-2"
+                  required
                 />
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
               </div>
 
               <div class="form-group">
@@ -92,7 +116,10 @@
                   name="password"
                   id="password"
                   class="form-control form-control-sm mt-2"
+                  required
                 />
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
               </div>
 
               <div class="d-grid gap-2">
@@ -115,6 +142,7 @@
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
+    <script src="../script.js"></script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script

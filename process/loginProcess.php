@@ -27,7 +27,15 @@
                 $_SESSION['user'] = $user;
     
                 header("location: ../page/user/dashboardPage.php");
-            }else {
+            } 
+            else if (strcmp($user['verif_code'],"Non-Aktif")==0) {
+                echo                     
+                    '<script>                     
+                    alert("Akunmu sudah dinon-aktifkan. Silahkan register ulang!");                      
+                    window.location = "../page/registerPage.php"                     
+                    </script>'; 
+            }
+            else {
                 echo                     
                     '<script>                     
                     alert("Silahkan verif email terlebih dahulu.");                      

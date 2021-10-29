@@ -3,24 +3,25 @@
 ?>
 
 <?php
-    if(isset($_GET['id_obat'])){               
-        include('../../db.php'); 
-        $id_obat = $_GET['id_obat']; 
-        $query = mysqli_query($con, "SELECT * FROM obat WHERE id_obat = '$id_obat'") or die(mysqli_error($con)); 
-        if(mysqli_num_rows($query) == 0) {
-            echo
-            '<script>                 
-            alert("Data not found!"); window.location = "./inventoryPage.php"                
-            </script>'; 
-        } else {
-            $data = mysqli_fetch_assoc($query);
-        }
-    }else {         
-        echo         
-            '<script>         
-            window.history.back()         
-            </script>';     
-    } 
+    include('../../db.php'); 
+    $id_transaction = $_GET['id_transaction']; 
+    $query = mysqli_query($con, "SELECT * FROM transaction WHERE id_transaction = '$id_transaction'") or die(mysqli_error($con)); 
+    if(mysqli_num_rows($query) == 0) {
+        echo
+        '<script>                 
+        alert("Data not found!"); window.location = "./transactionUserPage.php"                 
+        </script>'; 
+    } else {
+        $data = mysqli_fetch_assoc($query);
+        //get nama obat
+        $id_obat = $data['id_obat'];
+        $obat = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM obat WHERE id_obat=$id_obat"));
+        $nama_obat = $obat['nama_obat'];
+        //get nama user
+        $id_user = $data['id_user'];
+        $user = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM user WHERE id_user=$id_user"));
+        $nama_user = $user['fullname'];
+    }
 ?>
 
     <!-- navbar  -->
@@ -39,7 +40,7 @@
       <div class="collapse navbar-collapse mt-2" id="navbarNav">
         <ul class="navbar-nav nav-item" style="margin-left: 100px">
           <li>
-            <a href="./inventoryPage.php"><i class="fa fa-caret-left fa-2x mt-3"></i></a>
+            <a href="./transactionUserPage.php"><i class="fa fa-caret-left fa-2x mt-3"></i></a>
           </li>
         </ul>
       </div>
@@ -47,9 +48,21 @@
     <div class="global-container">
       <div class="card profile-form" style="height: 600px">
         <div class="card-body">
-          <h1 class="card-title text-center fs-4">Update an Item</h1>
+          <h1 class="card-title text-center fs-4">Update Status Transaction</h1>
           <div class="card-text">
-            <form action="../../process/admin/updateItemProcess.php?id_obat=<?php echo $data['id_obat']?>" method="POST" style="margin-top: 40px">
+            <form action="../../process/admin/updateTransactionProcess.php?id_transaction=<?php echo $data['id_transaction']?>" method="POST" style="margin-top: 40px">
+              <div class="form-group">
+                <label for="nama_user">Nama User</label>
+                <input
+                  type="text"
+                  name="nama_user"
+                  id="nama_user"
+                  class="form-control form-control-sm mt-2"
+                  value="<?= $nama_user?>"
+                  disabled
+                />
+              </div>
+
               <div class="form-group">
                 <label for="nama_obat">Nama Obat</label>
                 <input
@@ -57,53 +70,44 @@
                   name="nama_obat"
                   id="nama_obat"
                   class="form-control form-control-sm mt-2"
-                  value="<?= $data['nama_obat']?>"
+                  value="<?= $nama_obat?>"
+                  disabled
                 />
               </div>
 
               <div class="form-group">
-                <label for="jenis" style="margin-bottom: 5px">Jenis</label>
+                <label for="total">Total</label>
+                <input
+                  type="text"
+                  name="total"
+                  id="total"
+                  class="form-control form-control-sm mt-2"
+                  value="<?= $data['total']?>"
+                  disabled
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="status" style="margin-bottom: 5px">Status</label>
                 <select class="form-select" 
-                    aria-label="Default select example" name="jenis" id="jenis"
+                    aria-label="Default select example" name="status" id="status"
                     style="border: 2px solid #5913ca; border-radius: 10px; margin-bottom: 25px;">  
                     <option selected 
-                        value="<?= $data['jenis']?>"
+                        value="<?= $data['status']?>"
                     >  
-                        <?= $data['jenis']?>
+                        <?= $data['status']?>
                     </option>      
                     <?php
-                        $option = array("Sirup","Tablet", "Pil");
-                        foreach ($option as $jenis) 
+                        $option = array("Dibayar","Dikemas", "Dikirim", "Diterima");
+                        foreach ($option as $status) 
                         {
-                            if($jenis != $data['jenis'])
+                            if($status != $data['status'])
                             echo"
-                                <option value='$jenis'>$jenis</option>
+                                <option value='$status'>$status</option>
                             ";
                         }
                     ?>                              
                 </select>  
-              </div>
-
-              <div class="form-group">
-                <label for="harga">Harga</label>
-                <input
-                  type="text"
-                  name="harga"
-                  id="harga"
-                  class="form-control form-control-sm mt-2"
-                  value="<?= $data['harga']?>"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="stock">Stock</label>
-                <input
-                  type="text"
-                  name="stock"
-                  id="stock"
-                  class="form-control form-control-sm mt-2"
-                  value="<?= $data['stock']?>"
-                />
               </div>
 
               <div class="d-grid gap-2 p-2 ms-4 me-4">

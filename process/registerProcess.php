@@ -9,6 +9,8 @@
     require '../PHPMailer/src/POP3.php';
     require '../PHPMailer/src/SMTP.php';
     
+    session_start();
+    
     $fullname = $_POST['fullname'];        
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);         
     $email = $_POST['email'];         
@@ -17,15 +19,23 @@
 
     $sql = "SELECT * FROM user where email='$email'";
     $query = mysqli_query($con,$sql);
-    if(mysqli_num_rows($query) > 0){
+    $user = mysqli_fetch_assoc($query);
+    if(mysqli_num_rows($query) > 0 && strcmp($user['verif_code'],"Non-Aktif")!=0){
         echo                     
             '<script>                     
             alert("Email sudah terdaftar");                      
             window.location = "../page/registerPage.php"                     
             </script>'; 
     }else {
-        $sql = "INSERT INTO user (fullname, password, email, phone, verif_code)VALUES('$fullname', '$password', '$email', '$phone','$code')";
-        $query = mysqli_query($con,$sql);
+        if(mysqli_num_rows($query) > 0 && strcmp($user['verif_code'],"Non-Aktif")==0)
+        {
+            $sql = "UPDATE user SET fullname = '$fullname', password = '$password', phone = '$phone', verif_code = '$code' WHERE email = '$email'";
+            $query = mysqli_query($con,$sql);
+        }
+        else{
+            $sql = "INSERT INTO user (fullname, password, email, phone, verif_code)VALUES('$fullname', '$password', '$email', '$phone','$code')";
+            $query = mysqli_query($con,$sql);
+        }
 
         //Create a new PHPMailer instance
         $mail = new PHPMailer;
@@ -60,7 +70,7 @@
         $mail->Username = 'moonnfest@gmail.com';
 
         //Password to use for SMTP authentication
-        $mail->Password = 'm00nfest;';
+        $mail->Password = 'ajppetcqrcgvxubk';
 
         //Set who the message is to be sent from
         $mail->setFrom('no-reply@yourwebsite.com', 'Your website service');

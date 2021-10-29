@@ -28,7 +28,7 @@
         <div class="card-body">
           <h1 class="card-title text-center fs-4">Create new Item</h1>
           <div class="card-text">
-            <form action="../../process/admin/createItemProcess.php" method="POST" style="margin-top: 40px">
+            <form action="../../process/admin/createItemProcess.php" method="POST" style="margin-top: 40px" class="needs-validation" novalidate>
               <div class="form-group">
                 <label for="nama_obat">Nama Obat</label>
                 <input
@@ -36,7 +36,10 @@
                   name="nama_obat"
                   id="nama_obat"
                   class="form-control form-control-sm mt-2"
+                  required
                 />
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
               </div>
 
               <div class="form-group">
@@ -47,7 +50,8 @@
                     <option value="Sirup">Sirup</option>                 
                     <option value="Tablet">Tablet</option>                 
                     <option value="Pil">Pil</option>                 
-                </select>  
+                </select> 
+                <div class="valid-feedback"></div>
               </div>
 
               <div class="form-group">
@@ -57,7 +61,10 @@
                   name="harga"
                   id="harga"
                   class="form-control form-control-sm mt-2"
+                  required
                 />
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
               </div>
 
               <div class="form-group">
@@ -67,7 +74,10 @@
                   name="stock"
                   id="stock"
                   class="form-control form-control-sm mt-2"
+                  required
                 />
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
               </div>
 
               <div class="d-grid gap-2 p-2 ms-4 me-4">
@@ -85,6 +95,7 @@
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
+    <script src="../../script.js"></script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script

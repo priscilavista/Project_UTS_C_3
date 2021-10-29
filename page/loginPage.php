@@ -22,6 +22,17 @@
     <title>Login</title>
   </head>
   <body>
+    <style>
+      body {
+        background: #7f00ff !important;
+        background: -webkit-repeating-linear-gradient(
+          to right,
+          #e100ff,
+          #7f00ff
+        ) !important;
+        background: linear-gradient(to right, #e100ff, #7f00ff) !important;
+      }
+    </style>
     <!-- navbar  -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
       <button

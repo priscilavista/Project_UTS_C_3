@@ -6,10 +6,11 @@
         <div class="header">
           <p class="brand">Admin</p>
         </div>
-        <div class="body">
+        <div class="body" style="position: fixed; width: 250px;">
           <a href="./dashboardAdminPage.php"><div class="item active">Dashboard</div></a>
           <a href="./inventoryPage.php"><div class="item">Inventory</div></a>
-          <a href=""><div class="item">User Transaction</div></a>
+          <a href="./transactionUserPage.php"><div class="item">Ongoing Transaction</div></a>
+          <a href="./historyTransactionPage.php"><div class="item">History Transaction</div></a>
           <a href="../../process/logoutProcess.php"><div class="item logout">LOG OUT <i class="fa fa-sign-out"></i></div></a>
         </div>
       </div>
@@ -31,35 +32,62 @@
                   <thead> 
                       <tr> 
                       <th scope="col">No</th> 
-                      <th scope="col" >Obat</th> 
+                      <th scope="col">Obat</th> 
                       <th scope="col">Jenis</th> 
                       <th scope="col">Harga</th> 
                       <th scope="col">Stock</th> 
                       </tr> 
                   </thead> 
-                  <tbody> 
-                      <?php 
-                          $query = mysqli_query($con, "SELECT * FROM obat") or die(mysqli_error($con)); 
-                          
-                          if (mysqli_num_rows($query) == 0) { 
-                              echo '<tr> <td colspan="7"> Tidak ada data </td> </tr>'; 
-                          }else{ 
-                              $no = 1; 
-                              while($data = mysqli_fetch_assoc($query)){ 
-                              echo' 
-                                  <tr> 
-                                      <th scope="row">'.$no.'</th> 
-                                      <td>'.$data['nama_obat'].'</td> 
-                                      <td>'.$data['jenis'].'</td> 
-                                      <td>'.$data['harga'].'</td> 
-                                      <td>'.$data['stock'].'</td>
-                                  </tr>'; 
-                              $no++; 
-                              } 
-                          } 
-                      ?> 
-                  </tbody>
-              </table> 
+                  <?php
+                    include('../../db.php');
+                    $batas = 5;
+                    $halaman = @$_GET['halaman'];
+                      if (empty($halaman)) {
+                        $posisi = 0;
+                        $halaman = 1;
+                      }
+                      else {
+                        $posisi = ($halaman-1) * $batas;
+                      }
+                    $no = $posisi+1;
+                    $sql = "SELECT * FROM obat ORDER BY id_obat DESC limit $posisi,$batas";
+                    $hasil = mysqli_query($con, $sql);
+                    while($data = mysqli_fetch_assoc($hasil)) {
+                  ?>
+                      <tbody> 
+                      <tr> 
+                          <th scope="row"><?php echo $no;?></th> 
+                          <td scope="row"><?php echo $data['nama_obat'];?></td>
+                          <td scope="row"><?php echo $data['jenis'];?></td>
+                          <td scope="row"><?php echo $data['harga'];?></td>
+                          <td scope="row"><?php echo $data['stock'];?></td>
+                      </tr>
+                      </tbody>
+                      <?php
+                        $no++;
+                    }
+                      ?>
+                </table>
+                <?php
+                  $query2 = mysqli_query($con, "SELECT * FROM obat");
+                  $jmldata = mysqli_num_rows($query2);
+                  $jmlhalaman = ceil($jmldata/$batas);
+                ?>
+
+                <div class="text-center">
+                  <ul class="pagination">
+                    <?php
+                      for($i=1; $i<=$jmlhalaman; $i++) {
+                        if ($i != $halaman) {
+                          echo "<li class='page-item'><a class='page-link' href='dashboardAdminPage.php?halaman=$i'>$i</a></li>";
+                        }
+                        else {
+                          echo "<li class='page-item active'><a class='page-link' href='#'>$i</a></li>";
+                        }
+                      }
+                    ?>
+                  </ul>
+                </div>
           </div>
            
     </div>

@@ -29,5 +29,16 @@
     </head>
 
     <body>
+    <style>
+        body {
+            background: #512DA8 !important;
+            background: -webkit-repeating-linear-gradient(
+                to right,
+                #673AB7,
+                #512DA8
+            ) !important;
+            background: linear-gradient(to right, #673AB7, #512DA8) !important;
+            }
+        </style>
     '
 ?>

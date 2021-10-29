@@ -76,15 +76,15 @@
         <div class="carousel-item active">
           <img src="./image/image1.jpg" class="d-block w-100" alt="..." />
           <div class="carousel-caption">
-            <h5>First slide label</h5>
-            <p>Some representative placeholder content for the first slide.</p>
+            <h5>Welcome to All Cure</h5>
+            <!-- <p>Some representative placeholder content for the first slide.</p> -->
           </div>
         </div>
         <div class="carousel-item">
           <img src="./image/image2.jpg" class="d-block w-100" alt="..." />
           <div class="carousel-caption">
-            <h5>Second slide label</h5>
-            <p>Some representative placeholder content for the second slide.</p>
+            <h5>Welcome to All Cure</h5>
+            <!-- <p>Some representative placeholder content for the second slide.</p> -->
           </div>
         </div>
         <div class="carousel-item">
@@ -95,8 +95,8 @@
             style="height: 855px"
           />
           <div class="carousel-caption">
-            <h5>Third slide label</h5>
-            <p>Some representative placeholder content for the third slide.</p>
+            <h5>Welcome to All Cure</h5>
+            <!-- <p>Some representative placeholder content for the third slide.</p> -->
           </div>
         </div>
       </div>
